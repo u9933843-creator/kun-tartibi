@@ -1,0 +1,14 @@
+# Foydalanuvchi ma'lumotlari
+tasks.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Maxfiy fayllar
+.env
+
+# Muharrir
+.vscode/
+.idea/
