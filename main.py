@@ -62,6 +62,15 @@ def delete_task(number):
     print(f"O'chirildi: {removed['title']}")
 
 
+def edit_task(number, new_title):
+    tasks = load_tasks()
+    idx = get_index(tasks, number)
+    old_title = tasks[idx]["title"]
+    tasks[idx]["title"] = new_title
+    save_tasks(tasks)
+    print(f"O'zgartirildi: {old_title} -> {new_title}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Kun Tartibi - vazifalar ro'yxati")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -77,6 +86,10 @@ def main():
     p_del = sub.add_parser("delete", help="vazifani o'chirish")
     p_del.add_argument("number", type=int)
 
+    p_edit = sub.add_parser("edit", help="vazifa matnini o'zgartirish")
+    p_edit.add_argument("number", type=int)
+    p_edit.add_argument("title", help="yangi matn")
+
     args = parser.parse_args()
 
     if args.command == "add":
@@ -87,6 +100,8 @@ def main():
         complete_task(args.number)
     elif args.command == "delete":
         delete_task(args.number)
+    elif args.command == "edit":
+        edit_task(args.number, args.title)
 
 
 if __name__ == "__main__":
